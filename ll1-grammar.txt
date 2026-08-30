@@ -1,0 +1,76 @@
+Start ->
+    import "ifj25" for Ifj
+    class Program {
+        Code
+    }
+
+Code -> GlobCmd Code
+GlobCmd -> FuncDecl
+GlobCmd -> Getter
+GlobCmd -> Setter
+GlobCmd -> ε
+
+FuncDecl -> static <id> ( Params ) { Body }
+Getter -> static <id> { Body }
+Setter -> static <id> = ( Param ) { Body }
+
+Params -> ε
+Params -> Param
+Params -> Param, ParamsTail
+ParamsTail -> Param, ParamsTail
+ParamsTail -> Param
+Param -> <id>
+
+Body -> Cmd Body
+
+Cmd -> IfStm
+Cmd -> Ret
+Cmd -> VarDecl
+Cmd -> While
+Cmd -> Assign
+Cmd -> { Body }
+Cmd -> FuncCall
+Cmd -> BuiltInCall
+Cmd -> ε
+
+IfStm -> if ( Expr ) { Body } ElseStm
+ElseStm -> else { Body }
+ElseStm -> ε
+Ret -> return Expr
+VarDecl -> var <id> AssignTail
+While -> while ( Expr ) { Body }
+Assign -> <id> AssignTail
+BuiltInCall -> Ifj . FuncCall
+FuncCall -> <id>(Args)
+
+Args -> ε
+Args -> Expr
+Args -> Expr, ArgsTail
+ArgsTail -> Expr, ArgsTail
+ArgsTail -> Expr
+
+AssignTail -> = Expr
+AssignTail -> ε
+
+Expr -> BuiltInCall
+Expr -> FuncCall
+Expr -> <id>
+Expr -> <num>
+Expr -> <str>
+Expr -> true
+Expr -> false
+Expr -> null
+Expr -> ( Expr )
+Expr -> Expr + Expr
+Expr -> Expr - Expr
+Expr -> Expr * Expr
+Expr -> Expr / Expr
+Expr -> Expr < Expr
+Expr -> Expr > Expr
+Expr -> Expr <= Expr
+Expr -> Expr >= Expr
+Expr -> Expr == Expr
+Expr -> Expr != Expr
+Expr -> Expr is String
+Expr -> Expr is Num
+Expr -> Expr is Null
